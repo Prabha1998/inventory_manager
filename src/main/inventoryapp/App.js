@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -18,13 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const App: () => React$Node = () => {
   return (
@@ -33,7 +19,7 @@ const App: () => React$Node = () => {
             <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {
-                      fetch('http://172.18.85.1:8080/', {
+                      fetch('http://192.168.2.209:8080/', {
                         method: 'POST',
                         headers: {
                           Accept: 'application/json',
@@ -43,7 +29,15 @@ const App: () => React$Node = () => {
                           username: 'prabha',
                           passwd: 'prabha'
                         })
-                      }).catch((error) => console.error(error));
+                      }).then((response) => {
+                                 return response.text();
+                              })
+                              .then((responseJson) => {
+                                 if(responseJson==='"NOT_FOUND"'){
+                                 alert("wrong username and password");}
+                                 else{
+                                 alert("navigate to home screen");}
+                              }).catch((error) => console.error(error));
                     }}>
                     <Text style={styles.btnText}> login
                     </Text>
