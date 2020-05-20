@@ -12,9 +12,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Inspectionform {
-    @Id
     String inspplanid;
     int formid;
+    @Id
     int compid;
     String component;
     String findings;

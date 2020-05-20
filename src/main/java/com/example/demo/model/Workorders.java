@@ -12,8 +12,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Workorders {
-    @Id
     String inspplanid;
+    @Id
     int formid;
     String inspector;
     String planneddate;

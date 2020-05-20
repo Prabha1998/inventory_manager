@@ -29,12 +29,22 @@ public class WorkOrdersController {
         }
         return customWo;
     }
+
+    @PostMapping("/addwo")
+    public HttpStatus addwo(@RequestBody Workorders workorder){
+        return returnstatus(service.addwo(workorder));
+    }
     @Transactional
-    @DeleteMapping("/delWo")
-    public HttpStatus deleteWo(@RequestBody Workorders workorder){
-        System.out.println(workorder.getFormid());
-        System.out.println("hello");
-        Boolean flag = service.deleteWo(workorder.getInspplanid(),workorder.getFormid());
+    @DeleteMapping("/delwo")
+    public void deleteWo(@RequestBody Workorders workorder){
+        System.out.println(workorder);
+        //return returnstatus(service.deletebyid(workorder));
+    }
+    @DeleteMapping("/delwobyid/{formid}")
+    public HttpStatus deleteWo(@PathVariable int formid){
+        return returnstatus(service.deletebyformid(formid));
+    }
+    private HttpStatus returnstatus(Boolean flag){
         if(flag==true){
             System.out.println(HttpStatus.OK);
             return HttpStatus.OK;
