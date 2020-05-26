@@ -9,20 +9,46 @@ export default class Components extends Component{
                   this.state = {
                       open:false,
                       name:'',
-                      row:''}
+                      row:'',
+                      onSubmit:''
                       }
+           }
 
 componentDidMount(){
 this.setState({
                 name:this.props.row.component,
-                row:this.props.row
+                row:this.props.row,
+                onSubmit:this.props.onSubmit
                })
 }
 
- togglePanel=()=>{
+
+
+togglePanel=()=>{
         this.setState({open:!(this.state.open)});
         console.log(this.state.open);
-    }
+}
+
+handleInput(key,value){
+
+this.state.row[key]=value;
+if(this.state.value!=value)
+console.log(typeof this.state.onSubmit);
+this.state.onSubmit(this.state.row);
+
+}
+
+RenderFields=()=>{
+
+                const Labels=Object.keys(this.state.row);
+                const Placeholders=Object.values(this.state.row);
+         		console.log("from render fields");
+         		console.log( "from renderfields",Labels,Placeholders[0]);
+         		return Labels.map((lab,i)=>{return <Field
+         		                                           Label={lab}
+         		                                           Placeholder= {Placeholders[i].toString()}
+         		                                           updateData={(key,value)=>this.handleInput(key,value)} />});
+}
 
 
 render(){
@@ -30,22 +56,11 @@ return (
 <View>
     <TouchableOpacity onPress={this.togglePanel} style={styles.header}>
     <Text>{this.state.name}</Text></TouchableOpacity>
-       {this.state.open?<RenderFields row={this.props.row}/>:null}
+       {this.state.open?<this.RenderFields/>:null}
 </View>
 )
 }
 }
-
-const RenderFields=(props)=>{
-
-                const Labels=Object.keys(props.row);
-                const Placeholders=Object.values(props.row);
-         		console.log("from render fields");
-         		console.log( "from renderfields",Labels,Placeholders[0]);
-         		return Labels.map((lab,i)=>{return <Field Label={lab} Placeholder= {Placeholders[i].toString()}  />});
-}
-
-
 
 const styles = StyleSheet.create({
        container: {

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet,Text,style,label,TextInput,View} from 'react-native';
 
-function Field(props) {
+function Field(props){
+
+const handleClick = (text) => {
+    props.updateData(props.Label,text);
+  }
 console.log(props)
   return(
               <View style={styles.container}>
@@ -13,12 +17,13 @@ console.log(props)
                          placeholder={props.Placeholder}
                          placeholderTextColor="black"
                          autoCapitalize="none"
-                         //onChangeText={this.handleUsername}
+                         onChangeText={handleClick}
                        />
                      </View>
                </View>
          )
 }
+export default Field;
 const styles = StyleSheet.create({
 
        container: {
@@ -63,7 +68,6 @@ const styles = StyleSheet.create({
                  paddingLeft: 10,
        }
      });
-export default Field;
 //export default class Field extends Component{
 //
 //           constructor(props) {
