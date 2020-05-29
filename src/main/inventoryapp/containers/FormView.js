@@ -22,18 +22,17 @@ export default class FormView extends Component{
         .catch(error=>console.log(error));
     }
 
-    updatetempJsonArr(row){
-    this.state.tempJsonarr.push(row);
-    console.log(this.state.tempJsonarr);
-    console.log("hello form update row");
+    updatetempJsonArr(row,index){
+    this.state.jsonarr[index]=row;
     }
 
     handleSubmit(){
-    console.log("hello from submit");}
+
+    }
 
     RenderComponents=()=>{
                 this.state.jsonarr.map(r=>console.log(r));
-    			    return  this.state.jsonarr.map((row,index)=><Components row={row} key= {index} onSubmit={(row)=>{this.updatetempJsonArr(row)}} />)
+    			    return  this.state.jsonarr.map((row,index)=><Components row={row} key= {index} onSubmit={(row)=>{this.updatetempJsonArr(row,{index})}} />)
     }
 
     render(){

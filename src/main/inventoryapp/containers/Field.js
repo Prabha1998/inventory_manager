@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet,Text,style,label,TextInput,View} from 'react-native';
 
-function Field(props){
+function Field (props){
 
 const handleClick = (text) => {
     props.updateData(props.Label,text);

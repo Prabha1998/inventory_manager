@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface InspectionformRepository extends JpaRepository<Inspectionform,String> {
+public interface InspectionformRepository extends JpaRepository<Inspectionform,Integer> {
 
   //  @Query("SELECT * from inspectionform e where e.inspplanid =:inspid AND e.formid =:formid")
     public List<Inspectionform> findByInspplanidAndFormid(String inspid, int formid);
